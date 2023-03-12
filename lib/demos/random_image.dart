@@ -1,0 +1,21 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/material.dart';
+
+class RandomImage extends StatelessWidget {
+  const RandomImage({
+    Key? key,
+    this.height = 100,
+  }) : super(key: key);
+
+  final double height;
+  final imageUrl = 'https://picsum.photos/200/300';
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.network(
+      imageUrl,
+      height: height,
+      fit: BoxFit.cover,
+    );
+  }
+}
