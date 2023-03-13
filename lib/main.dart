@@ -43,6 +43,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData.dark().copyWith(
+        tabBarTheme: TabBarTheme(
+            labelColor: Colors.white, unselectedLabelColor: Colors.red, indicatorSize: TabBarIndicatorSize.label),
         inputDecorationTheme: InputDecorationTheme(
             filled: true,
             fillColor: Colors.white,
