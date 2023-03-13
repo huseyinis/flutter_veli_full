@@ -4,7 +4,6 @@ import 'package:flutter_veli_full/101/navigate_detail_learn.dart';
 
 class NavigationLearn extends StatefulWidget {
   const NavigationLearn({super.key});
-
   @override
   State<NavigationLearn> createState() => _NavigationLearnState();
 }
