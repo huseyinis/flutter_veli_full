@@ -4,6 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_veli_full/202/service/post_model.dart';
 
+import 'post_service.dart';
+
 class ServiceLearn extends StatefulWidget {
   const ServiceLearn({super.key});
 
@@ -17,13 +19,16 @@ class _ServiceLearnState extends State<ServiceLearn> {
   bool _isLoading = false;
   late final Dio _dio;
   final _baseUrl = 'https://jsonplaceholder.typicode.com/';
+
+  late final PostService _postService;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _dio = Dio(BaseOptions(baseUrl: _baseUrl));
+    _postService = PostService();
     name = 'veli';
-    fetchPostItems();
+    fetchPostItemsAdvance();
   }
 
   void _changeLoading() {
@@ -49,16 +54,7 @@ class _ServiceLearnState extends State<ServiceLearn> {
 
   Future<void> fetchPostItemsAdvance() async {
     _changeLoading();
-    final response = await _dio.get('posts/');
-
-    if (response.statusCode == HttpStatus.ok) {
-      final _datas = response.data;
-      if (_datas is List) {
-        setState(() {
-          _items = _datas.map((e) => PostModel.fromJson(e)).toList();
-        });
-      }
-    }
+    _items = await _postService.fetchPostItemsAdvance();
     _changeLoading();
   }
 
@@ -69,14 +65,16 @@ class _ServiceLearnState extends State<ServiceLearn> {
         actions: [_isLoading ? CircularProgressIndicator.adaptive() : SizedBox.shrink()],
         title: Text(name ?? ''),
       ),
-      body: ListView.builder(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        //lenght null ise hic gostermesin demis olduk
-        itemCount: _items?.length ?? 0,
-        itemBuilder: (context, index) {
-          return _PostCard(model: _items?[index]);
-        },
-      ),
+      body: _items == null
+          ? Placeholder()
+          : ListView.builder(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              //lenght null ise hic gostermesin demis olduk
+              itemCount: _items?.length ?? 0,
+              itemBuilder: (context, index) {
+                return _PostCard(model: _items?[index]);
+              },
+            ),
     );
   }
 }
