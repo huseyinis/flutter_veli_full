@@ -25,6 +25,7 @@ import '101/stateful_learn.dart';
 import '101/stateful_life_cycle_learn.dart';
 import '101/text_field_learn.dart';
 import '202/model_learn_view.dart';
+import '202/service/service_learn_view.dart';
 import '202/tab_learn.dart';
 import 'demos/color_demos_view.dart';
 import 'demos/color_life_cycle_view.dart';
@@ -58,7 +59,7 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.transparent,
             elevation: 0),
       ),
-      home: ModelLearnView(),
+      home: ServiceLearn(),
     );
   }
 }
