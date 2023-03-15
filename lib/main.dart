@@ -4,6 +4,7 @@ import 'package:flutter_veli_full/101/app_bar_learn.dart';
 import 'package:flutter_veli_full/101/container_sized_box_learn.dart';
 import 'package:flutter_veli_full/101/stateless_learn.dart';
 import 'package:flutter_veli_full/101/text_learn_view.dart';
+import 'package:flutter_veli_full/202/theme/light_theme.dart';
 
 import '101/button_learn.dart';
 import '101/card_learn.dart';
@@ -25,6 +26,7 @@ import '101/stateful_learn.dart';
 import '101/stateful_life_cycle_learn.dart';
 import '101/text_field_learn.dart';
 import '202/model_learn_view.dart';
+import '202/service/package_learn_view.dart';
 import '202/service/service_learn_view.dart';
 import '202/service/service_post_learn_view.dart';
 import '202/tab_learn.dart';
@@ -45,22 +47,24 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData.dark().copyWith(
-        tabBarTheme: TabBarTheme(
-            labelColor: Colors.white, unselectedLabelColor: Colors.red, indicatorSize: TabBarIndicatorSize.label),
-        inputDecorationTheme: InputDecorationTheme(
-            filled: true,
-            fillColor: Colors.white,
-            border: OutlineInputBorder(),
-            iconColor: Colors.red,
-            floatingLabelStyle: TextStyle(color: Colors.red, fontSize: 24, fontWeight: FontWeight.w600)),
-        appBarTheme: AppBarTheme(
-            centerTitle: true,
-            systemOverlayStyle: SystemUiOverlayStyle.light,
-            backgroundColor: Colors.transparent,
-            elevation: 0),
-      ),
-      home: ServiceLearn(),
+      theme: LightTheme().theme,
+
+      // ThemeData.dark().copyWith(
+      //   tabBarTheme: TabBarTheme(
+      //       labelColor: Colors.white, unselectedLabelColor: Colors.red, indicatorSize: TabBarIndicatorSize.label),
+      //   inputDecorationTheme: InputDecorationTheme(
+      //       filled: true,
+      //       fillColor: Colors.white,
+      //       border: OutlineInputBorder(),
+      //       iconColor: Colors.red,
+      //       floatingLabelStyle: TextStyle(color: Colors.red, fontSize: 24, fontWeight: FontWeight.w600)),
+      //   appBarTheme: AppBarTheme(
+      //       centerTitle: true,
+      //       systemOverlayStyle: SystemUiOverlayStyle.light,
+      //       backgroundColor: Colors.transparent,
+      //       elevation: 0),
+      // ),
+      home: PackageLearnView(),
     );
   }
 }
