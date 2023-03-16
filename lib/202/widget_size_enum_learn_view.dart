@@ -14,7 +14,7 @@ class _WidgetSizeEnumLearnViewState extends State<WidgetSizeEnumLearnView> {
       appBar: AppBar(),
       body: Card(
         child: Container(
-          height: 30,
+          height: WidgetSizes.normalCardHeight.value(),
           color: Colors.green,
         ),
       ),
@@ -25,4 +25,13 @@ class _WidgetSizeEnumLearnViewState extends State<WidgetSizeEnumLearnView> {
 enum WidgetSizes { normalCardHeight, circleProfileWidth }
 
 //extension kullanımıyla WidgetSizes classının üzerine yazmis oluyoruz
-extension WidgetSizeExtension on WidgetSizes {}
+extension WidgetSizeExtension on WidgetSizes {
+  double value() {
+    switch (this) {
+      case WidgetSizes.normalCardHeight:
+        return 30;
+      case WidgetSizes.circleProfileWidth:
+        return 25;
+    }
+  }
+}
