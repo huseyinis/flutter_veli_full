@@ -13,6 +13,11 @@ class _StateManageLearnViewState extends StateLearnViewModel {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          changeVisible();
+        },
+      ),
       appBar: AppBar(
         backgroundColor: isOpacity ? Colors.red : Colors.green,
         shadowColor: isVisible ? Colors.pink : Colors.yellow,
