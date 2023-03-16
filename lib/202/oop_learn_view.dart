@@ -30,10 +30,9 @@ class _OOPLearnViewState extends State<OOPLearnView> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          download?.DownloadItem(null);
+          download?.downloadItem(null);
         },
       ),
     );
   }
 }
-//dakıka 45.23
