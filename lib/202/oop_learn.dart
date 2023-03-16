@@ -2,8 +2,13 @@ import 'dart:io';
 
 import 'custom_exception.dart';
 
-class FileDownload {
-  bool? DownloadItem(FileItem? fileItem) {
+abstract class IFileDownload {
+  bool? downloadItem(FileItem? fileItem);
+}
+
+class FileDownload implements IFileDownload {
+  @override
+  bool? downloadItem(FileItem? fileItem) {
     if (fileItem == null) throw FileDownloadException();
 
     print('a');
