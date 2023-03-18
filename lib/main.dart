@@ -26,6 +26,7 @@ import '101/stateful_learn.dart';
 import '101/stateful_life_cycle_learn.dart';
 import '101/text_field_learn.dart';
 import '202/animated_learn_view.dart';
+import '202/cache/shared_learn_cache.dart';
 import '202/form_learn_view.dart';
 import '202/image_learn_202.dart';
 import '202/model_learn_view.dart';
@@ -68,7 +69,7 @@ class MyApp extends StatelessWidget {
       //       backgroundColor: Colors.transparent,
       //       elevation: 0),
       // ),
-      home: FormLearnView(),
+      home: SharedLearn(),
     );
   }
 }
