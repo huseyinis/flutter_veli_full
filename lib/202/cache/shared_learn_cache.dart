@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_veli_full/202/cache/shared_manager.dart';
+import 'package:flutter_veli_full/202/cache/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedLearn extends StatefulWidget {
@@ -25,9 +26,9 @@ class _SharedLearnState extends LoadingStatefull<SharedLearn> {
   }
 
   void _initialize() {
-    _changeLaoding();
+    changeLaoding();
     _manager.init();
-    _changeLaoding();
+    changeLaoding();
     getDefaultValues();
   }
 
@@ -60,9 +61,6 @@ class _SharedLearnState extends LoadingStatefull<SharedLearn> {
               _onChangeValue(value);
             },
           ),
-          Expanded(
-            child: _UserListView(),
-          ),
         ],
       ),
     );
@@ -82,11 +80,11 @@ class _SharedLearnState extends LoadingStatefull<SharedLearn> {
     return FloatingActionButton(
       child: Icon(Icons.save),
       onPressed: () async {
-        _changeLaoding();
+        changeLaoding();
         // final prefs = await SharedPreferences.getInstance();
         // await prefs.setInt('counter', _currentValue);
         await _manager.saveString(SharedKeys.counter, _currentValue.toString());
-        _changeLaoding();
+        changeLaoding();
       },
     );
   }
@@ -94,48 +92,15 @@ class _SharedLearnState extends LoadingStatefull<SharedLearn> {
   FloatingActionButton _removeValueButton() {
     return FloatingActionButton(
       onPressed: () async {
-        _changeLaoding();
+        changeLaoding();
         // final prefs = await SharedPreferences.getInstance();
         // await prefs.remove('counter');
         _manager.removeItem(SharedKeys.counter);
-        _changeLaoding();
+        changeLaoding();
       },
       child: Icon(Icons.delete),
     );
   }
-}
-
-class _UserListView extends StatelessWidget {
-  _UserListView({
-    Key? key,
-  }) : super(key: key);
-  final List<User> users = UserItems().users;
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: users.length,
-      itemBuilder: (BuildContext context, int index) {
-        return Card(
-          child: ListTile(
-            title: Text(users[index].name),
-            subtitle: Text(users[index].description),
-            trailing: Text(
-              users[index].url,
-              style: Theme.of(context).textTheme.subtitle1?.copyWith(decoration: TextDecoration.underline),
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class User {
-  final String name;
-  final String description;
-  final String url;
-
-  User(this.name, this.description, this.url);
 }
 
 class UserItems {
@@ -154,7 +119,7 @@ class UserItems {
 abstract class LoadingStatefull<T extends StatefulWidget> extends State<T> {
   bool isLoading = false;
 
-  void _changeLaoding() {
+  void changeLaoding() {
     setState(() {
       isLoading = !isLoading;
     });

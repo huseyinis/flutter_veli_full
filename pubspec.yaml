@@ -37,6 +37,7 @@ dependencies:
 
   #cache
   shared_preferences: ^2.0.18
+  flutter_secure_storage: ^8.0.0
 
   #Google 
   

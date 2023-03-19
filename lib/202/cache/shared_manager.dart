@@ -1,7 +1,7 @@
 import 'package:flutter_veli_full/202/cache/shared_not_initialize.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-enum SharedKeys { counter }
+enum SharedKeys { counter, users }
 
 class SharedManager {
   SharedPreferences? preferences;
@@ -22,9 +22,20 @@ class SharedManager {
     }
   }
 
+  Future<void> saveStringItems(SharedKeys key, List<String> value) async {
+    _checkPreferences();
+    await preferences?.setStringList(key.name, value);
+  }
+
   Future<void> saveString(SharedKeys key, String value) async {
     _checkPreferences();
     await preferences?.setString(key.name, value);
+  }
+
+  List<String>? getStrings(SharedKeys key) {
+    _checkPreferences();
+
+    return preferences?.getStringList(key.name);
   }
 
   String? getString(SharedKeys key) {
