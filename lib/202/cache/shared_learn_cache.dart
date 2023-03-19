@@ -11,14 +11,16 @@ class SharedLearn extends StatefulWidget {
 
 class _SharedLearnState extends LoadingStatefull<SharedLearn> {
   int _currentValue = 0;
-
   late final SharedManager _manager;
+
+  late final List<User> userItems;
   @override
   //initstate icerisinde await future seklinde kodlar yazilmaz cunku inistate beklemez
   //varsa boyle islem baska fonksiyonda yaz o fonksiyonu initstate icerisinden cagir
   void initState() {
     super.initState();
     _manager = SharedManager();
+    userItems = UserItems().users;
     _initialize();
   }
 
@@ -48,23 +50,32 @@ class _SharedLearnState extends LoadingStatefull<SharedLearn> {
     return Scaffold(
       appBar: AppBar(
         title: Text(_currentValue.toString()),
-        actions: [
-          isLoading
-              ? Center(
-                  child: CircularProgressIndicator(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                  ),
-                )
-              : SizedBox.shrink()
-        ],
+        actions: [_loding(context)],
       ),
       floatingActionButton: Row(mainAxisSize: MainAxisSize.min, children: [_saveValueButton(), _removeValueButton()]),
-      body: TextField(
-        onChanged: (value) {
-          _onChangeValue(value);
-        },
+      body: Column(
+        children: [
+          TextField(
+            onChanged: (value) {
+              _onChangeValue(value);
+            },
+          ),
+          Expanded(
+            child: _UserListView(),
+          ),
+        ],
       ),
     );
+  }
+
+  SingleChildRenderObjectWidget _loding(BuildContext context) {
+    return isLoading
+        ? Center(
+            child: CircularProgressIndicator(
+              color: Theme.of(context).scaffoldBackgroundColor,
+            ),
+          )
+        : SizedBox.shrink();
   }
 
   FloatingActionButton _saveValueButton() {
@@ -86,11 +97,56 @@ class _SharedLearnState extends LoadingStatefull<SharedLearn> {
         _changeLaoding();
         // final prefs = await SharedPreferences.getInstance();
         // await prefs.remove('counter');
-        await _manager.removeItem(SharedKeys.counter);
+        _manager.removeItem(SharedKeys.counter);
         _changeLaoding();
       },
       child: Icon(Icons.delete),
     );
+  }
+}
+
+class _UserListView extends StatelessWidget {
+  _UserListView({
+    Key? key,
+  }) : super(key: key);
+  final List<User> users = UserItems().users;
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: users.length,
+      itemBuilder: (BuildContext context, int index) {
+        return Card(
+          child: ListTile(
+            title: Text(users[index].name),
+            subtitle: Text(users[index].description),
+            trailing: Text(
+              users[index].url,
+              style: Theme.of(context).textTheme.subtitle1?.copyWith(decoration: TextDecoration.underline),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class User {
+  final String name;
+  final String description;
+  final String url;
+
+  User(this.name, this.description, this.url);
+}
+
+class UserItems {
+  late final List<User> users;
+
+  UserItems() {
+    users = [
+      User('vb', '10', 'vb10.dev'),
+      User('vb2', '102', 'vb10.dev'),
+      User('vb3', '103', 'vb10.dev'),
+    ];
   }
 }
 
