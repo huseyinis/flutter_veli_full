@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '202/animated_learn_view.dart';
 import '202/cache/secure_context/secure_context_learn.dart';
+import '202/sheet_learn.dart';
 import '202/theme/light_theme.dart';
 
 void main() {
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
       //       backgroundColor: Colors.transparent,
       //       elevation: 0),
       // ),
-      home: AnimatedLearnView(),
+      home: SheetLearn(),
     );
   }
 }
