@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 class AlertLearn extends StatefulWidget {
@@ -13,7 +15,19 @@ class _AlertLearnState extends State<AlertLearn> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showAboutDialog(context: context, applicationName: 'VB', children: [Text('data')]);
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text('Version update!'),
+                  actions: [
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Text('Update'),
+                    )
+                  ],
+                );
+              });
         },
       ),
       appBar: AppBar(),
